@@ -16,11 +16,14 @@
 
 package com.jsyn.unitgen;
 
-import junit.framework.TestCase;
-
 import com.jsyn.engine.SynthesisEngine;
+import org.junit.Ignore;
 
-public class TestUnitGate extends TestCase {
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
+
+@Ignore
+public class TestUnitGate {
 
     protected SynthesisEngine synthesisEngine;
     protected double time;

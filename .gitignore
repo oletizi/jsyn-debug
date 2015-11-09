@@ -2,4 +2,8 @@
 /build/
 /bin/
 /dist/
+jsyn.iml
+.idea
+out
+target
 

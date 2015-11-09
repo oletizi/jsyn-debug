@@ -16,11 +16,12 @@
 
 package com.jsyn.unitgen;
 
-import junit.framework.TestCase;
-
 import com.jsyn.JSyn;
 import com.jsyn.Synthesizer;
+import junit.framework.TestCase;
+import org.junit.Ignore;
 
+@Ignore
 public class TestConnections extends TestCase {
     Add add1;
     Add add2;

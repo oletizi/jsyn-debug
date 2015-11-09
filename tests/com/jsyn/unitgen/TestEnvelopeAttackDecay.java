@@ -17,23 +17,26 @@
 package com.jsyn.unitgen;
 
 import com.jsyn.engine.SynthesisEngine;
+import org.junit.After;
+import org.junit.Before;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class TestEnvelopeAttackDecay extends TestUnitGate {
     double attackTime;
     double decayTime;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         synthesisEngine = new SynthesisEngine();
         synthesisEngine.setRealTime(false);
         attackTime = 0.2;
         decayTime = 0.4;
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         synthesisEngine.stop();
     }
 

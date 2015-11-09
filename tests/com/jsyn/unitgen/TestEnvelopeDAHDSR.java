@@ -17,6 +17,12 @@
 package com.jsyn.unitgen;
 
 import com.jsyn.engine.SynthesisEngine;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class TestEnvelopeDAHDSR extends TestUnitGate {
     double delayTime;
@@ -26,9 +32,8 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
     double sustainLevel;
     double releaseTime;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+  @Before
+  public void setUp() throws Exception {
         synthesisEngine = new SynthesisEngine();
         synthesisEngine.setRealTime(false);
         delayTime = 0.1;
@@ -39,12 +44,12 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         releaseTime = 0.6;
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+  @After
+  public void tearDown() throws Exception {
         synthesisEngine.stop();
     }
 
+  @Test
     public void testStages() throws InterruptedException {
         EnvelopeDAHDSR ramp = checkToSustain();
 
@@ -99,6 +104,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         return ramp;
     }
 
+  @Test
     public void testRetrigger() throws InterruptedException {
         EnvelopeDAHDSR ramp = checkToSustain();
 
@@ -121,6 +127,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
     }
 
     // I noticed a hang while playing with knobs.
+    @Test
     public void testHang() throws InterruptedException {
 
         delayTime = 0.0;
@@ -167,6 +174,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         assertEquals("should jump to hold", 1.0, ramp.output.getValue(), 0.01);
     }
 
+  @Test
     public void testNegative() throws InterruptedException {
         delayTime = -0.1;
         attackTime = -0.2;
@@ -212,6 +220,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         assertEquals("release quickly", 0.0, releaseValue);
     }
 
+  @Test
     public void testOnOff() throws InterruptedException {
         EnvelopeDAHDSR ramp = new EnvelopeDAHDSR();
         synthesisEngine.add(ramp);
@@ -244,6 +253,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         assertEquals("after release", 0.0, ramp.output.getValue(), 0.01);
     }
 
+  @Test
     public void testAutoDisable() throws InterruptedException {
 
         LinearRamp ramp = new LinearRamp();
@@ -277,6 +287,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         }
     }
 
+  @Test
     public void testAutoDisableCircuit() throws InterruptedException {
         GatedRampCircuit circuit = new GatedRampCircuit();
         synthesisEngine.add(circuit);
@@ -329,6 +340,7 @@ public class TestEnvelopeDAHDSR extends TestUnitGate {
         assertEquals("env after release time should go to zero", 0.0, releaseValue, 0.0001);
     }
 
+  @Test
     public void testReleaseTiming() throws InterruptedException {
         checkReleaseTiming(0.1, 0.004);
         checkReleaseTiming(1.0, 0.002);
